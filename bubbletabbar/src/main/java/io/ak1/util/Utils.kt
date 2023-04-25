@@ -53,10 +53,9 @@ internal fun ImageView.setColorStateListAnimator(
 
 
 var DURATION = 350L
-var ALPHA = 0.15f
-internal fun TextView.expand(container: LinearLayout, iconColor: Int, cornerRadius: Float) {
+internal fun TextView.expand(container: LinearLayout, iconColor: Int, opacity: Float, cornerRadius: Float) {
     val bounds = Rect()
-    container.setCustomBackground(iconColor, ALPHA, cornerRadius)
+    container.setCustomBackground(iconColor, opacity, cornerRadius)
     paint.apply {
         getTextBounds(text.toString(), 0, text.length, bounds)
         ValueAnimator.ofInt(0, bounds.width() + paddingStart + 10).apply {
@@ -84,6 +83,7 @@ internal fun TextView.expand(container: LinearLayout, iconColor: Int, cornerRadi
 internal fun TextView.collapse(
     container: LinearLayout,
     iconColor: Int,
+    opacity: Float,
     cornerRadius: Float
 ) {
     animate().alpha(0f).apply {
@@ -99,7 +99,7 @@ internal fun TextView.collapse(
             duration = DURATION
             container.setCustomBackground(
                 iconColor,
-                ALPHA - (ALPHA * it.animatedFraction),
+                opacity - (opacity * it.animatedFraction),
                 cornerRadius
             )
             requestLayout()
@@ -111,6 +111,12 @@ internal fun TextView.collapse(
 internal fun LinearLayout.setCustomBackground(color: Int, alpha: Float, cornerRadius: Float) {
     val containerBackground = GradientDrawable().apply {
         this.cornerRadius = cornerRadius
+//        this.cornerRadii = floatArrayOf(
+//            40f, 40f,
+//            40f, 40f,
+//            20f, 20f,
+//            20f, 20f
+//        )
         DrawableCompat.setTint(
             DrawableCompat.wrap(this), Color.argb(
                 (Color.alpha(color) * alpha).toInt(),

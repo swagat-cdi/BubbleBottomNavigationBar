@@ -23,6 +23,11 @@ class BubbleTabBar : LinearLayout {
     private var cornerRadiusParam: Float = 0F
     private var customFontParam: Int = 0
 
+    private var bubbleColorParam: Int = Color.YELLOW
+    private var selectedItemTextColorParam: Int = Color.BLACK
+    private var selectedItemIconColorParam: Int = Color.BLACK
+    private var bubbleAlphaParam: Float = 0.15f
+
     init {
         orientation = HORIZONTAL
         gravity = Gravity.CENTER
@@ -121,6 +126,24 @@ class BubbleTabBar : LinearLayout {
                     R.styleable.BubbleTabBar_bubbletab_tab_corner_radius,
                     resources.getDimension(R.dimen.bubble_corner_radius)
                 )
+
+                bubbleColorParam = attributes.getColor(
+                    R.styleable.BubbleTabBar_bubbletab_bubble_color,Color.YELLOW
+                )
+
+                selectedItemTextColorParam = attributes.getColor(
+                    R.styleable.BubbleTabBar_bubbletab_selected_item_text_color,Color.BLACK
+                )
+
+                selectedItemIconColorParam = attributes.getColor(
+                    R.styleable.BubbleTabBar_bubbletab_selected_item_icon_color,Color.BLACK
+                )
+
+                bubbleAlphaParam = attributes.getFloat(
+                    R.styleable.BubbleTabBar_bubbletab_bubble_alpha,0.15f
+                )
+
+
                 if (menuResource >= 0) {
                     setMenuResource(menuResource)
                 }
@@ -153,6 +176,10 @@ class BubbleTabBar : LinearLayout {
                 it.disabledIconColor = disabledIconColorParam
                 it.titleSize = titleSizeParam
                 it.cornerRadius = cornerRadiusParam
+                it.bubbleColor = bubbleColorParam
+                it.bubbleAlpha = bubbleAlphaParam
+                it.selectedItemTextColor = selectedItemTextColorParam
+                it.selectedItemIconColor = selectedItemIconColorParam
             }
             addView(Bubble(context, it).apply {
                 if (it.checked) {

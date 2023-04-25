@@ -10,6 +10,10 @@
         <attr name="bubbletab_icon_size" format="dimension" />
         <attr name="bubbletab_title_size" format="dimension" />
         <attr name="bubbletab_tab_corner_radius" format="dimension" />
+        <attr name="bubbletab_bubble_color" format="color" />
+        <attr name="bubbletab_selected_item_text_color" format="color" />
+        <attr name="bubbletab_selected_item_icon_color" format="color" />
+        <attr name="bubbletab_bubble_alpha" format="float" />
     </declare-styleable>
 
     <declare-styleable name="Bubble">

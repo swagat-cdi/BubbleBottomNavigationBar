@@ -55,7 +55,7 @@ class Bubble(context: Context, private var item: MenuItem) : FrameLayout(context
             isEnabled = item.enabled
             if (isEnabled) {
                 setColorStateListAnimator(
-                    color = item.iconColor,
+                    color = item.selectedItemIconColor,
                     unselectedColor = item.disabledIconColor
                 )
             } else {
@@ -82,7 +82,7 @@ class Bubble(context: Context, private var item: MenuItem) : FrameLayout(context
                 }
             }
             text = item.title
-            setTextColor(item.iconColor)
+            setTextColor(item.selectedItemTextColor)
         }
 
 
@@ -104,9 +104,9 @@ class Bubble(context: Context, private var item: MenuItem) : FrameLayout(context
     override fun setSelected(selected: Boolean) {
         super.setSelected(selected)
         if (selected) {
-            title.expand(container, item.iconColor, item.cornerRadius)
+            title.expand(container, item.bubbleColor,item.bubbleAlpha, item.cornerRadius)
         } else {
-            title.collapse(container, item.iconColor, item.cornerRadius)
+            title.collapse(container, item.bubbleColor,item.bubbleAlpha ,item.cornerRadius)
         }
     }
 
