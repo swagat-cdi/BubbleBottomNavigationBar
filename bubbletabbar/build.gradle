@@ -47,3 +47,17 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }
 
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+
+                groupId = 'com.github.swagat-cdi'
+                artifactId = 'bubble_bottom_navigation_view'
+                version = '1.0.2'
+            }
+        }
+    }
+}
