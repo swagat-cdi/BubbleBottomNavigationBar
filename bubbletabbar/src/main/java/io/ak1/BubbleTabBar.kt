@@ -160,42 +160,46 @@ class BubbleTabBar : LinearLayout {
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     private fun setMenuResource(menuResource: Int) {
-        val menu = (MenuParser(context).parse(menuResource))
+        val menuList = (MenuParser(context).parse(menuResource))
         removeAllViews()
-        Log.e("menu ", "-->" + menu.size)
-        menu.forEach { it ->
-            if (it.id == 0) {
+        menuList.forEach { menu ->
+            if (menu.id == 0) {
                 throw ExceptionInInitializerError("Id is not added in menu item")
             }
-            it.apply {
-                it.horizontalPadding = horizontalPaddingParam
-                it.verticalPadding = verticalPaddingParam
-                it.iconSize = iconSizeParam
-                it.iconPadding = iconPaddingParam
-                it.customFont = customFontParam
-                it.disabledIconColor = disabledIconColorParam
-                it.titleSize = titleSizeParam
-                it.cornerRadius = cornerRadiusParam
-                it.bubbleColor = bubbleColorParam
-                it.bubbleAlpha = bubbleAlphaParam
-                it.selectedItemTextColor = selectedItemTextColorParam
-                it.selectedItemIconColor = selectedItemIconColorParam
+            menu.apply {
+                menu.horizontalPadding = horizontalPaddingParam
+                menu.verticalPadding = verticalPaddingParam
+                menu.iconSize = iconSizeParam
+                menu.iconPadding = iconPaddingParam
+                menu.customFont = customFontParam
+                menu.disabledIconColor = disabledIconColorParam
+                menu.titleSize = titleSizeParam
+                menu.cornerRadius = cornerRadiusParam
+                menu.bubbleColor = bubbleColorParam
+                menu.bubbleAlpha = bubbleAlphaParam
+                menu.selectedItemTextColor = selectedItemTextColorParam
+                menu.selectedItemIconColor = selectedItemIconColorParam
             }
-            addView(Bubble(context, it).apply {
-                if (it.checked) {
+            Log.e("menu ", "-->" + menu.toString())
+
+            addView(Bubble(context, menu).apply {
+                if (menu.checked) {
                     this.isSelected = true
                     oldBubble = this
                 }
                 setOnClickListener {
                     val b = it.id
-                    if (oldBubble != null && oldBubble!!.id != b) {
-                        (it as Bubble).isSelected = !it.isSelected
-                        oldBubble!!.isSelected = false
+                    if (menu.checkable) {
+                        if (oldBubble != null && oldBubble!!.id != b) {
+                            (it as Bubble).isSelected = !it.isSelected
+                            oldBubble!!.isSelected = false
+                        }
+                        oldBubble = it as Bubble
                     }
-                    oldBubble = it as Bubble
                     if (onBubbleClickListener != null) {
                         onBubbleClickListener!!.onBubbleClick(it.id)
                     }
+
                 }
             })
 

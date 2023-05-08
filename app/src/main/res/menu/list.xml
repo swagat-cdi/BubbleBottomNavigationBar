@@ -20,6 +20,7 @@
             android:title="@string/documents" />
 
     <item
+        android:checkable="false"
             android:id="@+id/setting"
             android:icon="@drawable/ic_android_black_24dp_rotated"
             android:color="@color/settings"

@@ -23,5 +23,6 @@
         <attr name="android:enabled"/>
         <attr name="android:checked"/>
         <attr name="android:color" format="color" />
+        <attr name="android:checkable"/>
     </declare-styleable>
 </resources>

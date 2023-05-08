@@ -14,7 +14,8 @@ data class MenuItem(
     @DrawableRes val icon: Int,
     val enabled: Boolean,
     @ColorInt val iconColor: Int,
-    val checked: Boolean = false
+    val checked: Boolean = false,
+    val checkable: Boolean = true
 ) {
     @FontRes
     var customFont: Int = 0
